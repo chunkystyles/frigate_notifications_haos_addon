@@ -1,0 +1,68 @@
+name: "Frigate Notifications"
+description: "Sends notifications when Frigate detects objects"
+version: "1.0.0"
+slug: "frigate_notifications"
+arch:
+  - aarch64
+  - amd64
+  - armhf
+  - armv7
+  - i386
+startup: application
+init: false
+apparmor: true
+homeassistant_api: true
+auth_api: true
+options:
+  ntfy_enabled: true
+  ntfy_url: "https://ntfy.com"
+  ntfy_topic: "frigate"
+  ntfy_tags:
+    - object: "car"
+      tags: "car"
+    - object: "person"
+      tags: "walking"
+  grouping_enabled: true
+  grouping_minutes: 5
+  ntfy_normal_priority: 3
+  ntfy_lower_priority: 2
+  ha_enabled: true
+  ha_entity_ids:
+  frigate_url: "https://frigate.com"
+  snapshot_options:
+    bbox: 1
+    timestamp: 1
+    crop: 1
+    h: 480
+    quality: 90
+  mqtt_address: "tcp://127.0.0.1"
+  mqtt_port: 1883
+  mqtt_topic: "frigate/events"
+  mqtt_username: ""
+  mqtt_password: ""
+schema:
+  ntfy_enabled: bool
+  ntfy_url: url
+  ntfy_topic: str
+  ntfy_tags:
+    - object: str
+      tags: str
+  grouping_enabled: bool
+  grouping_minutes: int?
+  ntfy_normal_priority: int
+  ntfy_lower_priority: int?
+  ha_enabled: bool
+  ha_entity_ids:
+    - str?
+  frigate_url: url
+  snapshot_options:
+    bbox: int?
+    timestamp: int?
+    crop: int?
+    h: int?
+    quality: int?
+  mqtt_address: str
+  mqtt_port: int?
+  mqtt_topic: str
+  mqtt_username: str?
+  mqtt_password: str?
