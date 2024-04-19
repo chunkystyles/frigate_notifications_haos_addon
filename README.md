@@ -1,0 +1,1 @@
+# frigate_notifications_haos_addon
