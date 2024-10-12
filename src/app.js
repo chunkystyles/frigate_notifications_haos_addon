@@ -37,12 +37,8 @@ async function initialize() {
       const before = event.before;
       const after = event.after;
       const type = event.type;
-      if (type === 'new') {
-        if (before && before.has_snapshot) {
-          sendNotification(before.camera, before.label, before.id);
-        } else if (after && after.has_snapshot) {
-          sendNotification(after.camera, after.label, after.id);
-        }
+      if (!before?.has_snapshot && after?.has_snapshot) {
+        sendNotification(after.camera, after.label, after.id);
       }
     });
   } catch (e) {
