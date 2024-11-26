@@ -8,6 +8,12 @@
 
 `ntfy_url`: The URL to your ntfy server.  For example, "http://ntfy.sh" or "http://127.0.0.1:80". HTTPS works as well if you have that configured.
 
+`ntfy_user`: Optional. To authenticate with ntfy, you can either use a user name and password, or a token.
+
+`ntfy_password`: Optional. Only used if both user and password are set.
+
+`ntfy_token`: Optional. Only used if user and password are not set.
+
 `ntfy_topic`: The topic to send the notification to.  For example, "frigate".
 
 `ntfy_tags`: Optional. These are used to add emojis to the notification and are configured by the object type detected by Frigate. In the example config, car is set to car and adds 🚗 when a car is detected. You can have multiple tags per object, separated by commas, for example "walking,standing_person". A full list of available tags can be found [here](https://docs.ntfy.sh/emojis/).

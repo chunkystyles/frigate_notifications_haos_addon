@@ -12,6 +12,11 @@ async function initialize() {
   const configFile = fs.readFileSync('./data/options.json', 'utf-8');
   config = JSON.parse(configFile);
   tagsMap = new Map();
+  if (config.ntfy_user && config.ntfy_password) {
+    config.ntfy_basicAuth = `Basic ${Buffer.from(config.ntfy_user + ':' + config.ntfy_password, 'utf8').toString('base64')}`;
+  } else if (config.ntfy_token) {
+    config.ntfy_token = `Bearer ${config.ntfy_token}`;
+  }
   config.ntfy_tags.forEach(tag => {
     tagsMap.set(tag.object, tag.tags);
   });
@@ -80,10 +85,15 @@ function sendNtfyNotification(camera, label, id) {
       'Attach': `${config.frigate_url}/api/events/${id}/snapshot.jpg${formatSnapshotOptions()}`,
       'Click': `${config.frigate_url}/api/events/${id}/clip.mp4`,
       'Tags': tagsMap.get(label),
-      'Priority': priority,
+      'Priority': priority
     },
     body: capitalizeFirstLetter(camera)
   };
+  if (config.ntfy_basicAuth) {
+    options.headers.Authorization = config.ntfy_basicAuth;
+  } else if (config.ntfy_token) {
+    options.headers.Authorization = config.ntfy_token;
+  }
   fetch(`${config.ntfy_url}/${config.ntfy_topic}`, options)
       .then(response => {
         if (response.status !== 200) {
