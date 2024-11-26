@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.1.1] - 2024-11-25
+
+- Fixed a small issue with the config.yaml format
+
 ## [1.1.0] - 2024-11-25
 
 - Added authentication options for ntfy.sh
