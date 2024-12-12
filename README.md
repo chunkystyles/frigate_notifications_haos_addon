@@ -30,6 +30,12 @@ Example of the notification in the Home Assistant companion app on Android:
 
 ![HA app](media/ha_app_tray_2_small.png)
 
+## Pushover
+
+Example of the notification in the Pushover app on Android:
+
+![Pushover app](media/pushover_app_small.png)
+
 ## Installation
 
 In Home Assistant, go to Settings -> Add-ons -> Add-on store -> ... button (top right) -> Repositories -> Add "https://github.com/chunkystyles/frigate_notifications_haos_addon"

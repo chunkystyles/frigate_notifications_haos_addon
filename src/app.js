@@ -60,6 +60,9 @@ function sendNotification(camera, label, id) {
       sendHaNotification(camera, label, id, entityId);
     });
   }
+  if (config.pushover_enabled) {
+    sendPushoverNotification(camera, label, id);
+  }
 }
 
 function sendNtfyNotification(camera, label, id) {
@@ -127,6 +130,33 @@ function sendHaNotification(camera, label, id, entityId) {
         }
       })
       .catch(error => console.error(`Error sending request to Home Assistant:`, error));
+}
+
+function sendPushoverNotification(camera, label, id) {
+  const body = {
+    token: config.pushover_api_token,
+    user: config.pushover_user_key,
+    message: capitalizeFirstLetter(camera),
+    title: capitalizeFirstLetter(label),
+    priority: config.pushover_priority,
+    url: `${config.frigate_url}/api/events/${id}/clip.mp4`,
+    url_title: 'View Clip',
+    attachment: `${config.frigate_url}/api/events/${id}/snapshot.jpg${formatSnapshotOptions()}`
+  };
+  const options = {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json'
+    },
+    body: JSON.stringify(body)
+  };
+  fetch('https://api.pushover.net/1/messages.json', options)
+      .then(response => {
+        if (response.status !== 200) {
+          console.error(`Non-successful response from Pushover API request: ${response.status} ${response.statusText}`);
+        }
+      })
+      .catch(error => console.error(`Error sending request to Pushover:`, error));
 }
 
 function formatSnapshotOptions() {

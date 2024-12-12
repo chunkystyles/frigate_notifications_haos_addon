@@ -32,6 +32,16 @@
 
 `ha_entity_ids`: The entity IDs of the devices you want to send notifications to. For example, "mobile_app_pixel_8". A notification will be sent to each device in the list.
 
+### Pushover
+
+`pushover_enabled`: When toggled on, the addon will send notifications to Pushover. Will work in conjunction with ntfy and Home Assistant notifications if they are enabled.
+
+`pushover_user_key`: The user key for your Pushover account.
+
+`pushover_api_token`: The API token for your Pushover application.
+
+`pushover_priority`: The priority of the Pushover notifications. See Pushover priority documentation [here](https://pushover.net/api#priority).
+
 ### Frigate
 
 `frigate_url`: The URL to your Frigate instance. For example, "http://frigate.com" or "http://127.0.0.1:5000". HTTPS works as well if you have that configured.
