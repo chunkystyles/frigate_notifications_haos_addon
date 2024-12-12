@@ -43,6 +43,10 @@ options:
   mqtt_topic: "frigate/events"
   mqtt_username: ""
   mqtt_password: ""
+  pushover_enabled: false
+  pushover_user_key: ""
+  pushover_api_token: ""
+  pushover_priority: 0
 schema:
   ntfy_enabled: bool
   ntfy_url: url
@@ -72,3 +76,7 @@ schema:
   mqtt_topic: str
   mqtt_username: str?
   mqtt_password: str?
+  pushover_enabled: bool
+  pushover_user_key: str
+  pushover_api_token: str
+  pushover_priority: int
